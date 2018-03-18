@@ -32,6 +32,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="Gray"
+                Command="{Binding CreateCommand}"
                 Content="Create" />
         <Button x:Name="DeleteButton"
                 Width="150"
