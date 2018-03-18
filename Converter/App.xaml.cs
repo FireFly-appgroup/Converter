@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Converter.Services;
+using Converter.Utils;
 using System.Windows;
 
 namespace Converter
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            var modules = ReflectionHelper.CreateAllInstancesOf<IModule>();
+            var vm = new MainWindowViewModel(modules);
+            mainWindow.DataContext = vm;
+            mainWindow.Closing += (s, args) => vm.SelectedModule.Deactivate();
+            mainWindow.Show();
+        }
     }
 }
