@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataAccessLayer\FileType.cs" />
+    <Compile Include="DataAccessLayer\Interfaces\IFile.cs" />
+    <Compile Include="DataAccessLayer\Structures\File.cs" />
+    <Compile Include="DataAccessLayer\Structures\TradeRecord.cs" />
     <Compile Include="MiddleLayers\MiddleLayerForAddPage.cs" />
     <Compile Include="MiddleLayers\MiddleLayerForConverter.cs" />
     <Compile Include="Resources\LocalizationResource.Designer.cs">
@@ -149,7 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BusinessLogicLayer\" />
-    <Folder Include="DataAccessLayer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
