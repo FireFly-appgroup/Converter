@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Converter.Services
 {
@@ -8,7 +6,7 @@ namespace Converter.Services
     {
         public static void ShowMessage(string message)
         {
-            MessageBox.Show(message, "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(message, "Messange", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
