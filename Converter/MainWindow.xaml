@@ -2,11 +2,67 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Converter"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="725"
+        Height="550"
+        mc:Ignorable="d">
+    <Grid Margin="0,0,-34,-31" Background="LightBlue">
+        <Button x:Name="AddButton"
+                Width="150"
+                Height="50"
+                Margin="29,28,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Gray"
+                Content="Add" />
+        <Button x:Name="RemoveButton"
+                Width="150"
+                Height="50"
+                Margin="29,97,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Gray"
+                Content="Remove" />
+        <Button x:Name="CreateButton"
+                Width="150"
+                Height="50"
+                Margin="29,166,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Gray"
+                Content="Create" />
+        <Button x:Name="DeleteButton"
+                Width="150"
+                Height="50"
+                Margin="29,234,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Gray"
+                Content="Delete" />
+        <Button x:Name="EditButton"
+                Width="150"
+                Height="50"
+                Margin="29,302,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Gray"
+                Content="Edit" />
+        <DataGrid x:Name="dataGrid"
+                  Width="448"
+                  Height="327"
+                  Margin="217,28,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top" />
+        <Button x:Name="ConvertButton"
+                Width="448"
+                Height="76"
+                Margin="217,394,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Coral"
+                Content="Convert" />
+
     </Grid>
 </Window>
