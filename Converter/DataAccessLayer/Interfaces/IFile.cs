@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Converter.DataAccessLayer.Interfaces
+﻿namespace Converter.DataAccessLayer.Interfaces
 {
     interface IFile
     {
