@@ -1,15 +1,76 @@
 ﻿<UserControl x:Class="Converter.Views.CreateBinaryFiles"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Converter.Views"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Converter.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Width="394.5"
+             Height="357"
+             Background="AliceBlue"
+             mc:Ignorable="d">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" Background="AliceBlue">
-        <TextBlock Text="{Binding HeadText}"  />
-        <Button Content="Click Me!" Margin="0,10,0,0" Width="60"
-                Command="{Binding ChangeHeadTextCommand, Mode=OneTime}" />
-    </StackPanel>
+    <Grid Width="300"
+          Height="290"
+          Margin="0,0,0,10"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Background="AliceBlue">
+        <DataGrid x:Name="DataGridWithBinaryList" Margin="0,-17,0,178" />
+        <Button Margin="0,291,0,-30"
+                Command="{Binding CreateBinaryFileCommand,
+                                  Mode=OneTime}"
+                Content="Create Binary File" />
+        <TextBox x:Name="IdTextBox"
+                 Width="120"
+                 Height="23"
+                 Margin="142,132,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding IdTextBox}"
+                 TextWrapping="Wrap" />
+        <TextBox x:Name="AccountTextBox"
+                 Width="120"
+                 Height="22"
+                 Margin="142,170,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding AccountTextBox}"
+                 TextWrapping="Wrap" />
+        <TextBox x:Name="VolumeTextBox"
+                 Width="120"
+                 Height="23"
+                 Margin="142,210,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding VolumeTextBox}"
+                 TextWrapping="Wrap" />
+        <TextBox x:Name="CommentTextBox"
+                 Width="120"
+                 Height="23"
+                 Margin="142,253,0,0"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Top"
+                 Text="{Binding CommentTextBox}"
+                 TextWrapping="Wrap" />
+        <Label x:Name="IdLabel"
+               Margin="82,132,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Id" />
+        <Label x:Name="AccountLabel"
+               Margin="82,170,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Account" />
+        <Label x:Name="VolumeLabel"
+               Margin="82,210,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Volume" />
+        <Label x:Name="CommentLabel"
+               Margin="70,253,0,0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Content="Comment" />
+    </Grid>
 </UserControl>

@@ -9,7 +9,7 @@ namespace Converter.MiddleLayers
     {
         public override string Name
         {
-            get { return "Add Binary Files"; }
+            get { return "3) Add Binary Files"; }
         }
         protected override UserControl CreateViewAndViewModel()
         {

@@ -8,7 +8,7 @@ namespace Converter.Utils
     {
         public override string Name
         {
-            get { return "Edit Binary Files"; }
+            get { return "4) Edit Binary Files"; }
         }
         protected override UserControl CreateViewAndViewModel()
         {

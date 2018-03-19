@@ -9,6 +9,6 @@ namespace Converter.DataAccessLayer.Interfaces
     interface IFile
     {
         void ToBinary();
-        void Save();
+        void Save(TradeRecord trade);
     }
 }

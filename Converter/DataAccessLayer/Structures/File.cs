@@ -1,9 +1,12 @@
 ﻿using Converter.DataAccessLayer.Interfaces;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Converter.DataAccessLayer.Structures
 {
@@ -18,9 +21,20 @@ namespace Converter.DataAccessLayer.Structures
         {
 
         }
-        public void Save()
+        public void Save(TradeRecord trade)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
 
+            saveFileDialog.Filter = "Binary File (*.bin)|*.bin";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
+                {
+                    sw.WriteLine(trade);
+                    sw.Close();
+                }
+            } 
         }
     }
 }

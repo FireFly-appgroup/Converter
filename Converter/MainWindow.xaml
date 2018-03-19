@@ -13,16 +13,18 @@
             <ColumnDefinition Width="180" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0" 
-             ItemsSource="{Binding Modules}" 
-             SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
+        <ListBox Grid.Column="0"
+                 ItemsSource="{Binding Modules}"
+                 SelectedItem="{Binding SelectedModule,
+                                        Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" 
-                      Content="{Binding UserInterface}" />
+        <ContentPresenter x:Name="contentPresenter"
+                          Grid.Column="1"
+                          Content="{Binding UserInterface}" />
     </Grid>
 </Window>

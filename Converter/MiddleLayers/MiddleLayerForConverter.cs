@@ -9,7 +9,7 @@ namespace Converter.MiddleLayers
     {
         public override string Name
         {
-            get { return "Converter"; }
+            get { return "2) Converter"; }
         }
         protected override UserControl CreateViewAndViewModel()
         {
