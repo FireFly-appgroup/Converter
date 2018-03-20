@@ -10,7 +10,7 @@ namespace Converter.BusinessLogicLayer.Structures
        public void ToConvert(FileType From, FileType To, string FileForConvert)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "CSV File (*.CSV)|*.CSV";
+            saveFileDialog.Filter = "File (*"+ To +")|*" + To;
             if (saveFileDialog.ShowDialog() == true)
             {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
