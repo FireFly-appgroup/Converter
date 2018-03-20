@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessLogicLayer\Interfaces\IConverter.cs" />
-    <Compile Include="BusinessLogicLayer\Structures\ConvertFromBinToCSV.cs" />
+    <Compile Include="BusinessLogicLayer\Converters\ConvertFromBinToCSV.cs" />
     <Compile Include="DataAccessLayer\FileType.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IFile.cs" />
     <Compile Include="DataAccessLayer\Structures\File.cs" />
