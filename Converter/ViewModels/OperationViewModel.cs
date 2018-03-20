@@ -1,12 +1,14 @@
 ﻿using Converter.DataAccessLayer;
 using Converter.DataAccessLayer.Structures;
 using Converter.Utils;
+using System.Collections.Generic;
 
 namespace Converter.ViewModels
 {
     public class OperationViewModel : ObservableObject
     {
-        private TradeRecord trade = new TradeRecord();
+        private List<TradeRecord> _tradeList = new List<TradeRecord>();
+        private TradeRecord _trade = new TradeRecord();
         private File _file = new File();
         private string _HeadText;
         private int _idTextBox;
@@ -76,11 +78,12 @@ namespace Converter.ViewModels
         #endregion
         private void CreateBinaryFile()
         {
-            trade.id = IdTextBox;
-            trade.account = AccountTextBox;
-            trade.volume = VolumeTextBox;
-            trade.comment = CommentTextBox;
-            _file.Save(trade);
+            _trade.id = IdTextBox;
+            _trade.account = AccountTextBox;
+            _trade.volume = VolumeTextBox;
+            _trade.comment = CommentTextBox;
+            _tradeList.Add(_trade);
+            _file.Save(_tradeList);
         }
     }
 }

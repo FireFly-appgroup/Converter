@@ -16,7 +16,7 @@ namespace Converter.DataAccessLayer.Structures
         {
 
         }
-        public void Save(TradeRecord trade)
+        public void Save(List<TradeRecord> trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -26,7 +26,8 @@ namespace Converter.DataAccessLayer.Structures
             {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
                 {
-                    sw.WriteLine(trade);
+                    foreach (var item in trade)
+                    sw.WriteLine(item.id + "\n" + item.account + "\n" + item.volume + "\n" + item.comment);
                     sw.Close();
                 }
             } 
