@@ -12,7 +12,7 @@ namespace Converter.Utils
         }
         protected override UserControl CreateViewAndViewModel()
         {
-            return new CreateBinaryFiles() { DataContext = new OperationViewModel(Name) };
+            return new CreateBinaryFiles() { DataContext = new OperationViewModel() };
         }
     }
 }

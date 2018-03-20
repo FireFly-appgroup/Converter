@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BusinessLogicLayer\Interfaces\IConverter.cs" />
+    <Compile Include="BusinessLogicLayer\Structures\ConvertFromBinToCSV.cs" />
     <Compile Include="DataAccessLayer\FileType.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IFile.cs" />
     <Compile Include="DataAccessLayer\Structures\File.cs" />
@@ -152,9 +154,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusinessLogicLayer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

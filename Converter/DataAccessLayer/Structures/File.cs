@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Converter.DataAccessLayer.Structures
 {
@@ -12,15 +13,16 @@ namespace Converter.DataAccessLayer.Structures
         public string Path { get; set; }
         public List<TradeRecord> tradeRecord = new List<TradeRecord>();
 
-        public void ToBinary()
+        public string ToBinary()
         {
-
+            string BinFormat = "Binary File (*.bin)|*.bin";
+            return BinFormat;
         }
         public void Save(List<TradeRecord> trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-            saveFileDialog.Filter = "Binary File (*.bin)|*.bin";
+            saveFileDialog.Filter = ToBinary();
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -31,6 +33,20 @@ namespace Converter.DataAccessLayer.Structures
                     sw.Close();
                 }
             } 
+        }
+        public string Open()
+        {
+            string BinaryFile = string.Empty;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Binary File (*.bin)|*.bin";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                StreamReader reader = new StreamReader(fileInfo.Open(FileMode.Open, FileAccess.Read), Encoding.GetEncoding(1251));
+                BinaryFile = reader.ReadToEnd();
+                reader.Close();
+            }
+            return BinaryFile;
         }
     }
 }

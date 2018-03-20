@@ -7,30 +7,17 @@ namespace Converter.ViewModels
 {
     public class OperationViewModel : ObservableObject
     {
+        #region vars
         private List<TradeRecord> _tradeList = new List<TradeRecord>();
         private TradeRecord _trade = new TradeRecord();
         private File _file = new File();
-        private string _HeadText;
         private int _idTextBox;
         private int _accountTextBox;
         private double _volumeTextBox;
         private string _commentTextBox;
         private RelayCommand _createBinaryFileCommand;
-
-        public OperationViewModel(string name)
-        {
-            HeadText = name;
-        }
+        #endregion
         #region Properties
-        public string HeadText
-        {
-            get { return _HeadText; }
-            set
-            {
-                _HeadText = value;
-                RaisePropertyChanged(nameof(HeadText));
-            }
-        }
         public int IdTextBox
         {
             get { return _idTextBox; }

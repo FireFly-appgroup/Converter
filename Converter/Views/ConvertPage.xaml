@@ -27,11 +27,11 @@
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding ListOfTrade}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="125"
+                <DataGridTextColumn Width="100"
                                     Binding="{Binding Id,
                                                       Mode=TwoWay}"
                                     Header="Id" />
-                <DataGridTextColumn Width="125"
+                <DataGridTextColumn Width="100"
                                     Binding="{Binding Account,
                                                       Mode=TwoWay}"
                                     Header="Account" />
@@ -39,10 +39,14 @@
                                     Binding="{Binding Volume,
                                                       Mode=TwoWay}"
                                     Header="Volume" />
-                <DataGridTextColumn Width="125"
+                <DataGridTextColumn Width="100"
                                     Binding="{Binding Comment,
                                                       Mode=TwoWay}"
                                     Header="Comment" />
+                <DataGridTextColumn Width="100"
+                                    Binding="{Binding Progress,
+                                                      Mode=TwoWay}"
+                                    Header="Progress" />
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="FromLabel"
@@ -57,7 +61,7 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding MyEnumTypeValues}"
-                  SelectedItem="{Binding FilyTypeProperty}" />
+                  SelectedItem="{Binding FilyTypePropertyFrom}" />
         <Label x:Name="ToLabel"
                Width="28"
                Margin="282,254,0,0"
@@ -71,7 +75,7 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding MyEnumTypeValues}"
-                  SelectedItem="{Binding FilyTypeProperty}" />
+                  SelectedItem="{Binding FilyTypePropertyTo}" />
         <Button x:Name="Open"
                 Width="500"
                 Height="39"

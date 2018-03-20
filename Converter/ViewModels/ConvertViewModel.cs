@@ -1,35 +1,45 @@
 ﻿using Converter.DataAccessLayer;
+using Converter.BusinessLogicLayer.Structures;
 using Converter.Models;
 using Converter.Utils;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace Converter.ViewModels
 {
     public class ConvertViewModel : ObservableObject
     {
-        private string _HeadText;
+        #region vars
+        private ConvertFromBinToCSV _fromBinToCSV = new ConvertFromBinToCSV();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
         private ItemsModel items = new ItemsModel();
         private ObservableCollection<ItemsModel> _listOfTrade = new ObservableCollection<ItemsModel>();
-        private FileType _filyType;
-        public ConvertViewModel()
+        private FileType _filyTypeFrom;
+        private FileType _filyTypeTo;
+        private string _progress;
+        private DataAccessLayer.Structures.File _file = new DataAccessLayer.Structures.File();
+        private string _fileName {get; set;}
+        #endregion
+        #region Properties
+        public FileType FilyTypePropertyFrom
         {
-            HeadText = "Converter";
-        }
-        public FileType FilyTypeProperty
-        {
-            get { return _filyType; }
+            get { return _filyTypeFrom; }
             set
             {
-                _filyType = value;
-                RaisePropertyChanged(nameof(_filyType));
+                _filyTypeFrom = value;
+                RaisePropertyChanged(nameof(_filyTypeFrom));
+            }
+        }
+        public FileType FilyTypePropertyTo
+        {
+            get { return _filyTypeTo; }
+            set
+            {
+                _filyTypeTo = value;
+                RaisePropertyChanged(nameof(_filyTypeTo));
             }
         }
         public IEnumerable<FileType> MyEnumTypeValues
@@ -49,13 +59,13 @@ namespace Converter.ViewModels
                 RaisePropertyChanged(nameof(ListOfTrade));
             }
         }
-        public string HeadText
+        public string Progress
         {
-            get { return _HeadText; }
+            get { return _progress; }
             set
             {
-                _HeadText = value;
-                RaisePropertyChanged(nameof(HeadText));
+                _progress = value;
+                RaisePropertyChanged(nameof(Progress));
             }
         }
         public RelayCommand OpenCommand
@@ -63,7 +73,7 @@ namespace Converter.ViewModels
             get
             {
                 return _openCommand = _openCommand ??
-                  new RelayCommand(ToOpen);
+                  new RelayCommand(DownloadFile);
             }
         }
         public RelayCommand ConvertCommand
@@ -71,31 +81,29 @@ namespace Converter.ViewModels
             get
             {
                 return _convertCommand = _convertCommand ??
-                  new RelayCommand(ToConvert);
+                  new RelayCommand(Converter);
             }
         }
-        private void ToOpen()
+        #endregion
+        private void DownloadFile()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Binary File (*.bin)|*.bin";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
-                StreamReader reader = new StreamReader(fileInfo.Open(FileMode.Open, FileAccess.Read), Encoding.GetEncoding(1251));
-                int i = 0;
-                string line = reader.ReadToEnd();
-                string[] t = line.Split('\n');
-                items.Id = t[i];
-                items.Account = t[i + 1];
-                items.Volume = t[i + 2];
-                items.Comment = t[i + 3];
-                ListOfTrade.Add(items);
-                reader.Close();
-            }
+            _fileName = _file.Open();
+            AddingInformationToDataGrid();
         }
-        private void ToConvert()
+        private void Converter()
         {
-
+            if (FilyTypePropertyFrom == FileType.bin && FilyTypePropertyTo == FileType.CSV)
+            _fromBinToCSV.ToConvert(FilyTypePropertyFrom, FilyTypePropertyTo, _fileName);
+        }
+        private void AddingInformationToDataGrid()
+        {
+            int i = 0;
+            string[] t = _fileName.Split('\n');
+            items.Id = t[i];
+            items.Account = t[i + 1];
+            items.Volume = t[i + 2];
+            items.Comment = t[i + 3];
+            ListOfTrade.Add(items);
         }
     }
 }

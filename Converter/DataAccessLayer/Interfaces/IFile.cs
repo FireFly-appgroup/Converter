@@ -4,7 +4,8 @@ namespace Converter.DataAccessLayer.Interfaces
 {
     interface IFile
     {
-        void ToBinary();
+        string ToBinary();
         void Save(List<TradeRecord> trade);
+        string Open();
     }
 }

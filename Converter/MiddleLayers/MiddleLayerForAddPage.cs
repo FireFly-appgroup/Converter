@@ -13,7 +13,7 @@ namespace Converter.MiddleLayers
         }
         protected override UserControl CreateViewAndViewModel()
         {
-            return new AddBinaryFiles() { DataContext = new OperationViewModel(Name) };
+            return new AddBinaryFiles() { DataContext = new OperationViewModel() };
         }
     }
 }
