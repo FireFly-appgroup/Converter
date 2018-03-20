@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Converter.DataAccessLayer
 {
-    enum FileType
+    public enum FileType
     {
-        CSV = 0, txt = 1, pdf = 2, doc = 4, bin = 8
+        [Description(".CSV")]
+        CSV,
+        [Description(".txt")]
+        txt,
+        [Description(".pdf")]
+        pdf,
+        [Description(".doc")]
+        doc,
+        [Description(".bin")]
+        bin
     }
 }

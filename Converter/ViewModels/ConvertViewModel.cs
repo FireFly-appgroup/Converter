@@ -1,8 +1,12 @@
-﻿using Converter.Models;
+﻿using Converter.DataAccessLayer;
+using Converter.Models;
 using Converter.Utils;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Converter.ViewModels
@@ -14,12 +18,28 @@ namespace Converter.ViewModels
         private RelayCommand _openCommand;
         private ItemsModel items = new ItemsModel();
         private ObservableCollection<ItemsModel> _listOfTrade = new ObservableCollection<ItemsModel>();
-
+        private FileType _filyType;
         public ConvertViewModel()
         {
             HeadText = "Converter";
         }
-
+        public FileType FilyTypeProperty
+        {
+            get { return _filyType; }
+            set
+            {
+                _filyType = value;
+                RaisePropertyChanged(nameof(_filyType));
+            }
+        }
+        public IEnumerable<FileType> MyEnumTypeValues
+        {
+            get
+            {
+                return Enum.GetValues(typeof(FileType))
+                    .Cast<FileType>();
+            }
+        }
         public ObservableCollection<ItemsModel> ListOfTrade
         {
             get { return _listOfTrade; }
