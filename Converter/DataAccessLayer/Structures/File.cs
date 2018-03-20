@@ -11,19 +11,11 @@ namespace Converter.DataAccessLayer.Structures
         public double Size { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-        public List<TradeRecord> tradeRecord = new List<TradeRecord>();
-
-        public string ToBinary()
-        {
-            string BinFormat = "Binary File (*.bin)|*.bin";
-            return BinFormat;
-        }
+        public List<string> tradeRecord = new List<string>();
         public void Save(List<TradeRecord> trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.Filter = ToBinary();
-
+            saveFileDialog.Filter = "Binary File (*.bin)|*.bin";
             if (saveFileDialog.ShowDialog() == true)
             {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
@@ -44,6 +36,10 @@ namespace Converter.DataAccessLayer.Structures
                 FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
                 StreamReader reader = new StreamReader(fileInfo.Open(FileMode.Open, FileAccess.Read), Encoding.GetEncoding(1251));
                 BinaryFile = reader.ReadToEnd();
+                Name = fileInfo.Name;
+                Path = fileInfo.DirectoryName;
+                Size = fileInfo.Length;
+                tradeRecord.Add(BinaryFile);
                 reader.Close();
             }
             return BinaryFile;
