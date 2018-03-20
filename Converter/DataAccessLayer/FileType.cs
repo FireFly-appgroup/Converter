@@ -4,8 +4,8 @@ namespace Converter.DataAccessLayer
 {
     public enum FileType
     {
-        [Description(".CSV")]
-        CSV,
+        [Description(".csv")]
+        csv,
         [Description(".txt")]
         txt,
         [Description(".pdf")]

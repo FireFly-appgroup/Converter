@@ -92,7 +92,7 @@ namespace Converter.ViewModels
         }
         private void Converter()
         {
-            if (FilyTypePropertyFrom == FileType.bin && FilyTypePropertyTo == FileType.CSV)
+            if (FilyTypePropertyFrom == FileType.bin && FilyTypePropertyTo == FileType.csv)
             _fromBinToCSV.ToConvert(FilyTypePropertyFrom, FilyTypePropertyTo, _fileName);
         }
         private void AddingInformationToDataGrid()

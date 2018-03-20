@@ -2,7 +2,7 @@
 
 namespace Converter.BusinessLogicLayer.Interfaces
 {
-    interface IConverter
+    public interface IConverter
     {
         void ToConvert(FileType From, FileType To, string File);
     }
