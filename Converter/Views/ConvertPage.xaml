@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Width="572.132"
              Height="404.918"
-             Background="AliceBlue"
+             Background="LightBlue"
              mc:Ignorable="d">
 
     <Grid Width="562"
@@ -15,6 +15,7 @@
           HorizontalAlignment="Center"
           VerticalAlignment="Center">
         <Button Margin="21,301,44,34"
+                Background="Coral"
                 Command="{Binding ConvertCommand,
                                   Mode=OneTime}"
                 Content="Convert" />
@@ -51,27 +52,27 @@
         </DataGrid>
         <Label x:Name="FromLabel"
                Width="46"
-               Margin="15,254,0,0"
+               Margin="31,256,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="From" />
         <ComboBox x:Name="FromComboBox"
                   Width="163"
-                  Margin="80,258,0,0"
+                  Margin="82,258,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding MyEnumTypeValues}"
                   SelectedItem="{Binding FilyTypePropertyFrom}" />
         <Label x:Name="ToLabel"
                Width="28"
-               Margin="282,254,0,0"
+               Margin="262,254,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="To" />
         <ComboBox x:Name="ToComboBox"
                   Width="170"
                   Height="26"
-                  Margin="348,254,0,0"
+                  Margin="308,254,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding MyEnumTypeValues}"
@@ -79,7 +80,7 @@
         <Button x:Name="Open"
                 Width="500"
                 Height="39"
-                Margin="18,23,0,0"
+                Margin="18,15,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Command="{Binding OpenCommand,
