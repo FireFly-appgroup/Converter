@@ -1,11 +1,10 @@
 ﻿using Converter.DataAccessLayer;
-using Converter.BusinessLogicLayer.Structures;
-using Converter.Models;
 using Converter.Utils;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using Converter.BusinessLogicLayer.Interfaces;
+using Converter.BusinessLogicLayer;
 
 namespace Converter.ViewModels
 {
@@ -20,7 +19,6 @@ namespace Converter.ViewModels
         private FileType _filyTypeTo;
         private string _progress;
         private DataAccessLayer.Structures.File _file = new DataAccessLayer.Structures.File();
-        private string _fileName {get; set;}
         #endregion
         #region Properties
         public FileType FilyTypePropertyFrom
@@ -91,7 +89,7 @@ namespace Converter.ViewModels
         private void Converter()
         { 
             var convertType = FileType.BinaryToCsv;
-            _fromBinToCSV.GetConverter(convertType).ToConvert(_fileName);
+            _fromBinToCSV.GetConverter(convertType).ToConvert(ListOfTrade);
         }
     }
 }

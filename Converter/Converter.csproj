@@ -55,42 +55,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BusinessLogicLayer\ConvertFactory.cs" />
     <Compile Include="BusinessLogicLayer\Interfaces\IConverter.cs" />
     <Compile Include="BusinessLogicLayer\Converters\ConvertFromBinToCSV.cs" />
+    <Compile Include="BusinessLogicLayer\Interfaces\IConvertFactory.cs" />
     <Compile Include="DataAccessLayer\FileType.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IFile.cs" />
     <Compile Include="DataAccessLayer\Structures\File.cs" />
     <Compile Include="DataAccessLayer\Structures\TradeRecord.cs" />
-    <Compile Include="MiddleLayers\MiddleLayerForAddPage.cs" />
-    <Compile Include="MiddleLayers\MiddleLayerForConverter.cs" />
-    <Compile Include="Models\ItemsModel.cs" />
-    <Compile Include="Resources\LocalizationResource.Designer.cs">
+    <Compile Include="UserInterface\MiddleLayers\MiddleLayerForConverter.cs" />
+    <Compile Include="UserInterface\Resources\LocalizationResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizationResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\MessageService.cs" />
-    <Compile Include="Services\ReflectionHelper.cs" />
-    <Compile Include="Utils\IModule.cs" />
-    <Compile Include="MiddleLayers\MiddeLayerForEditPage.cs" />
-    <Compile Include="MiddleLayers\MiddleLayerForCreatePage.cs" />
-    <Compile Include="Utils\ModuleBase.cs" />
-    <Compile Include="Utils\RelayCommand.cs" />
-    <Compile Include="ViewModels\ConvertViewModel.cs" />
-    <Compile Include="ViewModels\DeleteViewModel.cs" />
-    <Compile Include="ViewModels\OperationViewModel.cs" />
-    <Compile Include="ViewModels\RemoveViewModel.cs" />
-    <Compile Include="Views\AddBinaryFiles.xaml.cs">
-      <DependentUpon>AddBinaryFiles.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ConvertPage.xaml.cs">
+    <Compile Include="UserInterface\Services\MessageService.cs" />
+    <Compile Include="UserInterface\Services\ReflectionHelper.cs" />
+    <Compile Include="UserInterface\Utils\IModule.cs" />
+    <Compile Include="UserInterface\MiddleLayers\MiddleLayerForCreatePage.cs" />
+    <Compile Include="UserInterface\Utils\ModuleBase.cs" />
+    <Compile Include="UserInterface\Utils\RelayCommand.cs" />
+    <Compile Include="UserInterface\ViewModels\ConvertViewModel.cs" />
+    <Compile Include="UserInterface\ViewModels\CreateBinaryViewModel.cs" />
+    <Compile Include="UserInterface\Views\ConvertPage.xaml.cs">
       <DependentUpon>ConvertPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CreateBinaryFiles.xaml.cs">
+    <Compile Include="UserInterface\Views\CreateBinaryFiles.xaml.cs">
       <DependentUpon>CreateBinaryFiles.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditBinaryFiles.xaml.cs">
-      <DependentUpon>EditBinaryFiles.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,26 +95,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AddBinaryFiles.xaml">
+    <Page Include="UserInterface\Views\ConvertPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ConvertPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CreateBinaryFiles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\EditBinaryFiles.xaml">
+    <Page Include="UserInterface\Views\CreateBinaryFiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Utils\ObservableObject.cs" />
+    <Compile Include="UserInterface\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="UserInterface\Utils\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -141,7 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LocalizationResource.resx">
+    <EmbeddedResource Include="UserInterface\Resources\LocalizationResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>

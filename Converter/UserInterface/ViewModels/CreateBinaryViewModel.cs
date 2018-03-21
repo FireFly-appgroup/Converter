@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Converter.ViewModels
 {
-    public class OperationViewModel : ObservableObject
+    public class CreateBinaryViewModel : ObservableObject
     {
         #region vars
         private List<TradeRecord> _tradeList = new List<TradeRecord>();

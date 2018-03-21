@@ -4,15 +4,15 @@ using System.Windows.Controls;
 
 namespace Converter.Utils
 {
-   public class MiddeLayerForEditPage : ModuleBase
+    public class MiddleLayerForCreatePage : ModuleBase
     {
         public override string Name
         {
-            get { return "4) Edit Binary Files"; }
+            get { return "1) Create Binary Files"; }
         }
         protected override UserControl CreateViewAndViewModel()
         {
-            return new EditBinaryFiles() { DataContext = new OperationViewModel() };
+            return new CreateBinaryFiles() { DataContext = new CreateBinaryViewModel() };
         }
     }
 }

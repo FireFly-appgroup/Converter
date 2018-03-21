@@ -1,9 +1,10 @@
 ﻿using Converter.DataAccessLayer;
+using System.Collections.Generic;
 
 namespace Converter.BusinessLogicLayer.Interfaces
 {
     public interface IConverter
     {
-        void ToConvert(string File);
+        void ToConvert(List<TradeRecord> File);
     }
 }

@@ -30,11 +30,11 @@
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100"
+                <DataGridTextColumn Width="125"
                                     Binding="{Binding id,
                                                       Mode=TwoWay}"
                                     Header="Id" />
-                <DataGridTextColumn Width="100"
+                <DataGridTextColumn Width="125"
                                     Binding="{Binding account,
                                                       Mode=TwoWay}"
                                     Header="Account" />

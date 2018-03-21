@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace Converter.DataAccessLayer.Structures
 {
@@ -35,6 +34,7 @@ namespace Converter.DataAccessLayer.Structures
             if (openFileDialog.ShowDialog() == true)
             {
                 BinaryReader read = new BinaryReader(new FileStream(openFileDialog.FileName, FileMode.Open));
+                Name = openFileDialog.FileName;
                 int k = 0;
                 byte[] tree = new byte[1];
                 while (read.PeekChar() != -1)
