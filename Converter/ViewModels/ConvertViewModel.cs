@@ -12,7 +12,7 @@ namespace Converter.ViewModels
     public class ConvertViewModel : ObservableObject
     {
         #region vars
-        private ConvertFromBinToCSV _fromBinToCSV = new ConvertFromBinToCSV();
+        private IConvertFactory _fromBinToCSV = new ConvertFactory();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
         private ItemsModel items = new ItemsModel();
@@ -87,13 +87,13 @@ namespace Converter.ViewModels
         #endregion
         private void DownloadFile()
         {
-            _fileName = _file.Open();
+            _fileName = _file.Load();
             AddingInformationToDataGrid();
         }
         private void Converter()
-        {
-            if (FilyTypePropertyFrom == FileType.bin && FilyTypePropertyTo == FileType.csv)
-            _fromBinToCSV.ToConvert(FilyTypePropertyFrom, FilyTypePropertyTo, _fileName);
+        { 
+            var convertType = FileType.BinaryToCsv;
+            _fromBinToCSV.GetConverter(convertType).ToConvert(_fileName);
         }
         private void AddingInformationToDataGrid()
         {

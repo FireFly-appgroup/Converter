@@ -4,6 +4,6 @@ namespace Converter.BusinessLogicLayer.Interfaces
 {
     public interface IConverter
     {
-        void ToConvert(FileType From, FileType To, string File);
+        void ToConvert(string File);
     }
 }

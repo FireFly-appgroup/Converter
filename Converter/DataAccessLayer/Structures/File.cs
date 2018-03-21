@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace Converter.DataAccessLayer.Structures
@@ -21,12 +22,12 @@ namespace Converter.DataAccessLayer.Structures
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
                 {
                     foreach (var item in trade)
-                    sw.WriteLine(item.id + "\n" + item.account + "\n" + item.volume + "\n" + item.comment);
+                        sw.WriteLine(item.id + "\n" + item.account + "\n" + item.volume + "\n" + item.comment);
                     sw.Close();
                 }
-            } 
+            }
         }
-        public string Open()
+        public string Load()
         {
             string BinaryFile = string.Empty;
             OpenFileDialog openFileDialog = new OpenFileDialog();
