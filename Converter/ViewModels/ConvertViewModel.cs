@@ -15,8 +15,7 @@ namespace Converter.ViewModels
         private IConvertFactory _fromBinToCSV = new ConvertFactory();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
-        private ItemsModel items = new ItemsModel();
-        private ObservableCollection<ItemsModel> _listOfTrade = new ObservableCollection<ItemsModel>();
+        private List<TradeRecord> _listOfTrade = new List<TradeRecord>();
         private FileType _filyTypeFrom;
         private FileType _filyTypeTo;
         private string _progress;
@@ -50,7 +49,7 @@ namespace Converter.ViewModels
                     .Cast<FileType>();
             }
         }
-        public ObservableCollection<ItemsModel> ListOfTrade
+        public List<TradeRecord> ListOfTrade
         {
             get { return _listOfTrade; }
             set
@@ -87,23 +86,12 @@ namespace Converter.ViewModels
         #endregion
         private void DownloadFile()
         {
-            _fileName = _file.Load();
-            AddingInformationToDataGrid();
+            ListOfTrade = _file.Load();
         }
         private void Converter()
         { 
             var convertType = FileType.BinaryToCsv;
             _fromBinToCSV.GetConverter(convertType).ToConvert(_fileName);
-        }
-        private void AddingInformationToDataGrid()
-        {
-            int i = 0;
-            string[] t = _fileName.Split('\n');
-            items.Id = t[i];
-            items.Account = t[i + 1];
-            items.Volume = t[i + 2];
-            items.Comment = t[i + 3];
-            ListOfTrade.Add(items);
         }
     }
 }

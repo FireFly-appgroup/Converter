@@ -4,7 +4,7 @@ namespace Converter.DataAccessLayer.Interfaces
 {
     interface IFile
     {
-        void Save(List<TradeRecord> trade);
-        string Load();
+        void Save<T>(T trade);
+        List<TradeRecord> Load();
     }
 }
