@@ -2,13 +2,14 @@
 using Converter.DataAccessLayer.Structures;
 using Converter.Utils;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Converter.ViewModels
 {
     public class CreateBinaryViewModel : ObservableObject
     {
         #region vars
-        private List<TradeRecord> _tradeList = new List<TradeRecord>();
+        private ObservableCollection<TradeRecord> _tradeList = new ObservableCollection<TradeRecord>();
         private TradeRecord _trade = new TradeRecord();
         private File _file = new File();
         private int _idTextBox;
@@ -60,6 +61,15 @@ namespace Converter.ViewModels
             {
                 return _createBinaryFileCommand = _createBinaryFileCommand ??
                   new RelayCommand(CreateBinaryFile);
+            }
+        }
+        public ObservableCollection<TradeRecord> TradeList
+        {
+            get { return _tradeList; }
+            set
+            {
+                _tradeList = value;
+                RaisePropertyChanged(nameof(TradeList));
             }
         }
         #endregion

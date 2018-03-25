@@ -4,24 +4,60 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Converter.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Width="394.5"
-             Height="357"
+             Width="925"
+             Height="475"
              Background="LightBlue"
              mc:Ignorable="d">
 
     <Grid Width="394"
           Height="357"
+          Margin="4,1,527,117"
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
           Background="LightBlue">
-        <DataGrid x:Name="DataGridWithBinaryList" Margin="218,28,10,115" />
-        <Button Margin="19,200,191,115"
-                Background="Coral"
+        <DataGrid x:Name="DataGridWithBinaryList"
+                  Width="500"
+                  Height="271"
+                  Margin="258,28,-314,115"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding TradeList,
+                                        Mode=Default,
+                                        UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="125"
+                                    Binding="{Binding id,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}"
+                                    Header="ID"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Width="125"
+                                    Binding="{Binding account,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}"
+                                    Header="Account"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Width="125"
+                                    Binding="{Binding volume,
+                                                      Mode=TwoWay,
+                                                      UpdateSourceTrigger=PropertyChanged}"
+                                    Header="Volume"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Width="125"
+                                    Binding="{Binding comment}"
+                                    Header="Comment"
+                                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Margin="19,200,159,115"
+                Background="#0088ac"
                 Command="{Binding CreateBinaryFileCommand,
                                   Mode=OneTime}"
-                Content="Create Binary File" />
+                Content="Create Binary File"
+                Foreground="White" />
         <TextBox x:Name="IdTextBox"
-                 Width="120"
+                 Width="152"
                  Height="24"
                  Margin="83,30,0,0"
                  HorizontalAlignment="Left"
@@ -29,7 +65,7 @@
                  Text="{Binding IdTextBox}"
                  TextWrapping="Wrap" />
         <TextBox x:Name="AccountTextBox"
-                 Width="120"
+                 Width="152"
                  Height="22"
                  Margin="83,72,0,0"
                  HorizontalAlignment="Left"
@@ -37,7 +73,7 @@
                  Text="{Binding AccountTextBox}"
                  TextWrapping="Wrap" />
         <TextBox x:Name="VolumeTextBox"
-                 Width="120"
+                 Width="152"
                  Height="24"
                  Margin="83,114,0,0"
                  HorizontalAlignment="Left"
@@ -45,7 +81,7 @@
                  Text="{Binding VolumeTextBox}"
                  TextWrapping="Wrap" />
         <TextBox x:Name="CommentTextBox"
-                 Width="120"
+                 Width="152"
                  Height="22"
                  Margin="83,156,0,0"
                  HorizontalAlignment="Left"
