@@ -23,6 +23,12 @@
                 Content="Convert"
                 Foreground="White" />
 
+        <Button Margin="273,28,313,646"
+                Background="#0088ac"
+                Command="{Binding ClearCommand,
+                                  Mode=OneTime}"
+                Content="Clear All"
+                Foreground="White" />
         <DataGrid x:Name="DataGridWithBinaryList"
                   Width="420"
                   Height="271"

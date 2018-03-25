@@ -18,6 +18,7 @@ namespace Converter.ViewModels
         private IConvertFactory _fromBinToCSV = new ConvertFactory();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
+        private RelayCommand _clearCommand;
         private ObservableCollection<TradeRecord> _listOfTrade = new ObservableCollection<TradeRecord>();
         private FileType _filyTypeFrom;
         private FileType _filyTypeTo;
@@ -70,7 +71,6 @@ namespace Converter.ViewModels
                 RaisePropertyChanged(nameof(ConvertList));
             }
         }
-
         public RelayCommand OpenCommand
         {
             get
@@ -85,6 +85,14 @@ namespace Converter.ViewModels
             {
                 return _convertCommand = _convertCommand ??
                   new RelayCommand(Converter);
+            }
+        }
+        public RelayCommand ClearCommand
+        {
+            get
+            {
+                return _clearCommand = _clearCommand ??
+                  new RelayCommand(Clear);
             }
         }
         #endregion
@@ -117,6 +125,10 @@ namespace Converter.ViewModels
             {
                 files.Progress = "Completed";
             }
+        }
+        private void Clear()
+        {
+            ConvertList.Clear();
         }
     }
 }
