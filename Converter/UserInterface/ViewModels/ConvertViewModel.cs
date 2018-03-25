@@ -6,6 +6,9 @@ using System.Linq;
 using Converter.BusinessLogicLayer.Interfaces;
 using Converter.BusinessLogicLayer;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Threading;
+using Converter.UserInterface.Models;
 
 namespace Converter.ViewModels
 {
@@ -15,13 +18,12 @@ namespace Converter.ViewModels
         private IConvertFactory _fromBinToCSV = new ConvertFactory();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
-        private List<TradeRecord> _listOfTrade = new List<TradeRecord>();
+        private ObservableCollection<TradeRecord> _listOfTrade = new ObservableCollection<TradeRecord>();
         private FileType _filyTypeFrom;
         private FileType _filyTypeTo;
-        private string _progress;
         private DataAccessLayer.Structures.File _file = new DataAccessLayer.Structures.File();
-        private ObservableCollection<string> _listOfname = new ObservableCollection<string>();
-        private string Path { get; set; }
+        private ObservableCollection<FilesModel> _convertList = new ObservableCollection<FilesModel>();
+        private FilesModel files = new FilesModel();
         #endregion
         #region Properties
         public FileType FilyTypePropertyFrom
@@ -50,7 +52,7 @@ namespace Converter.ViewModels
                     .Cast<FileType>();
             }
         }
-        public List<TradeRecord> ListOfTrade
+        public ObservableCollection<TradeRecord> ListOfTrade
         {
             get { return _listOfTrade; }
             set
@@ -59,24 +61,16 @@ namespace Converter.ViewModels
                 RaisePropertyChanged(nameof(ListOfTrade));
             }
         }
-        public ObservableCollection<string> ListOfName
+        public ObservableCollection<FilesModel> ConvertList
         {
-            get { return _listOfname; }
+            get { return _convertList; }
             set
             {
-                _listOfname = value;
-                RaisePropertyChanged(nameof(ListOfName));
+                _convertList = value;
+                RaisePropertyChanged(nameof(ConvertList));
             }
         }
-        public string Progress
-        {
-            get { return _progress; }
-            set
-            {
-                _progress = value;
-                RaisePropertyChanged(nameof(Progress));
-            }
-        }
+
         public RelayCommand OpenCommand
         {
             get
@@ -97,13 +91,30 @@ namespace Converter.ViewModels
         private void DownloadFile()
         {
             ListOfTrade = _file.Load();
-            var Size = _file.Size;
-            Path = _file.Path;
-            ListOfName = _file.ListOfNames;
+            files.Name = _file.Name;
+            files.Progress = "Not Completed";
+            ConvertList.Add(files);
         }
-        private void Converter()
-        { 
-            _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade, Path);
+        private async void Converter()
+        {  
+            await TaskCompleted();
+        }
+        private async Task TaskCompleted()
+        {
+            var progressHandler = new Progress<string>(value =>
+            {
+                files.Progress = value;
+            });
+            var progress = progressHandler as IProgress<string>;
+            await Task.Run(() =>
+            {
+                _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade);
+                Thread.Sleep(100);
+            });
+            foreach (var item in ConvertList)
+            {
+                files.Progress = "Completed";
+            }
         }
     }
 }

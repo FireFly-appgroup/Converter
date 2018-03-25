@@ -1,19 +1,21 @@
 ﻿using Converter.BusinessLogicLayer.Interfaces;
 using System.IO;
-using System.Collections.Generic;
 using System;
 using System.Reflection;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Converter.BusinessLogicLayer.Structures
 {
     public class ConvertFromBinToCSV : IConverter
     {
-       public void ToConvert<T>(List<T> FileForConvert, string FilePath)
+       public async Task ToConvert<T>(ObservableCollection<T> FileForConvert)
         {
-          foreach (T item in FileForConvert)
+            await Task.Delay(10);
+            foreach (T item in FileForConvert)
             {
-                string csvCompletePath = String.Format(FilePath + ".csv");
+                string csvCompletePath = String.Format(AppDomain.CurrentDomain.BaseDirectory + "{0}.csv", Guid.NewGuid());
                 if (FileForConvert == null || FileForConvert.Count == 0) return;
                 Type type = FileForConvert[0].GetType();
                 string newLine = Environment.NewLine;

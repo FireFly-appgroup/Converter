@@ -64,6 +64,7 @@
     <Compile Include="DataAccessLayer\File.cs" />
     <Compile Include="DataAccessLayer\Structures\TradeRecord.cs" />
     <Compile Include="UserInterface\MiddleLayers\MiddleLayerForConverter.cs" />
+    <Compile Include="UserInterface\Models\FilesModel.cs" />
     <Compile Include="UserInterface\Resources\LocalizationResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
