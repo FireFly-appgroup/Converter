@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Converter.BusinessLogicLayer.Interfaces
 {
     public interface IConverter
     {
-        Task ToConvert<T>(ObservableCollection<T> File);
+        List<string> ToConvert<T>(ObservableCollection<T> File);
     }
 }

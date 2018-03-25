@@ -108,7 +108,9 @@ namespace Converter.ViewModels
             var progress = progressHandler as IProgress<string>;
             await Task.Run(() =>
             {
-                _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade);
+                var listOfPathes = _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade);
+                foreach (var item in listOfPathes)
+                    files.ConvertedFile = item;
                 Thread.Sleep(100);
             });
             foreach (var item in ConvertList)
