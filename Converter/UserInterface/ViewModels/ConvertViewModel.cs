@@ -100,8 +100,11 @@ namespace Converter.ViewModels
         {
             ListOfTrade = _file.Load();
             files.Name = _file.Name;
-            files.Progress = "Not Completed";
-            ConvertList.Add(files);
+            if (files.Name != String.Empty)
+            {
+                files.Progress = "Not Completed";
+                ConvertList.Add(files);
+            }
         }
         private async void Converter()
         {  

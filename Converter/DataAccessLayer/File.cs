@@ -2,8 +2,10 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows;
 
 namespace Converter.DataAccessLayer.Structures
 {
@@ -14,6 +16,7 @@ namespace Converter.DataAccessLayer.Structures
         public string Name { get; set; }
         public string Path { get; set; }    
         public ObservableCollection<TradeRecord> tradeRecord = new ObservableCollection<TradeRecord>();
+        private bool IsOpenFile { get; set; }
         public void Save<T>(T trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -29,9 +32,12 @@ namespace Converter.DataAccessLayer.Structures
         public ObservableCollection<TradeRecord> Load()
         {
             string BinaryFile = string.Empty;
+            Name = String.Empty; Path = String.Empty;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Binary File (*.bin)|*.bin";
-            if (openFileDialog.ShowDialog() == true)
+            openFileDialog.Title = "Convert Browser";
+            openFileDialog.FileOk += new CancelEventHandler(OnFileOpenOK);
+            if (openFileDialog.ShowDialog() == true && IsOpenFile == true)
             {
                 BinaryReader read = new BinaryReader(new FileStream(openFileDialog.FileName, FileMode.Open));
                 Name = openFileDialog.SafeFileName;
@@ -67,6 +73,10 @@ namespace Converter.DataAccessLayer.Structures
                 ms.Position = 0;
                 return bf.Deserialize(ms) as object;
             }
+        }
+        public void OnFileOpenOK(Object sender, CancelEventArgs e)
+        {
+            IsOpenFile = true;
         }
     }
 }
