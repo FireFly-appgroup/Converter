@@ -1,24 +1,35 @@
 ﻿using Converter.BusinessLogicLayer.Interfaces;
-using Converter.DataAccessLayer;
-using Microsoft.Win32;
 using System.IO;
 using System.Collections.Generic;
+using System;
+using System.Reflection;
+using System.Linq;
 
 namespace Converter.BusinessLogicLayer.Structures
 {
     public class ConvertFromBinToCSV : IConverter
     {
-       public void ToConvert(List<TradeRecord> FileForConvert)
+       public void ToConvert<T>(List<T> FileForConvert, string FilePath)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "File (*.csv)|*.csv";
-            if (saveFileDialog.ShowDialog() == true)
+          foreach (T item in FileForConvert)
             {
-                using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile(), System.Text.Encoding.Default))
+                string csvCompletePath = String.Format(FilePath + ".csv");
+                if (FileForConvert == null || FileForConvert.Count == 0) return;
+                Type type = FileForConvert[0].GetType();
+                string newLine = Environment.NewLine;
+                if (!Directory.Exists(Path.GetDirectoryName(csvCompletePath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(csvCompletePath));
+                using (StreamWriter sw = new StreamWriter(csvCompletePath))
                 {
-                    foreach (var item in FileForConvert)
-                    sw.WriteLine(item.id + "\n" + item.account + "\n" + item.volume + "\n" + item.comment + "\n");
-                    sw.Close();
+                    object o = Activator.CreateInstance(type);
+                    PropertyInfo[] props = o.GetType().GetProperties();
+                    sw.Write(string.Join(Environment.NewLine, props.Select(d => d.Name).ToArray()) + newLine);
+                        var row = string.Join(",", props.Select(d => item.GetType()
+                                                                        .GetProperty(d.Name)
+                                                                        .GetValue(item, null)
+                                                                        .ToString())
+                                                                        .ToArray());
+                        sw.Write(row + newLine);
                 }
             }
         }

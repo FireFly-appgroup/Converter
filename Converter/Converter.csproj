@@ -61,7 +61,7 @@
     <Compile Include="BusinessLogicLayer\Interfaces\IConvertFactory.cs" />
     <Compile Include="DataAccessLayer\FileType.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IFile.cs" />
-    <Compile Include="DataAccessLayer\Structures\File.cs" />
+    <Compile Include="DataAccessLayer\File.cs" />
     <Compile Include="DataAccessLayer\Structures\TradeRecord.cs" />
     <Compile Include="UserInterface\MiddleLayers\MiddleLayerForConverter.cs" />
     <Compile Include="UserInterface\Resources\LocalizationResource.Designer.cs">

@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -14,6 +15,7 @@ namespace Converter.DataAccessLayer.Structures
         public string Name { get; set; }
         public string Path { get; set; }    
         public List<TradeRecord> tradeRecord = new List<TradeRecord>();
+        public ObservableCollection<string> ListOfNames = new ObservableCollection<string>();
         public void Save<T>(T trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -34,7 +36,9 @@ namespace Converter.DataAccessLayer.Structures
             if (openFileDialog.ShowDialog() == true)
             {
                 BinaryReader read = new BinaryReader(new FileStream(openFileDialog.FileName, FileMode.Open));
-                Name = openFileDialog.FileName;
+                Name = openFileDialog.SafeFileName;
+                Path = openFileDialog.FileName;
+                Size = read.BaseStream.Length;
                 int k = 0;
                 byte[] tree = new byte[1];
                 while (read.PeekChar() != -1)
@@ -44,6 +48,7 @@ namespace Converter.DataAccessLayer.Structures
                 }
                 read.Close();
                 tradeRecord = Unboxing(tree) as List<TradeRecord>;
+                ListOfNames.Add(Name);
             }
             return tradeRecord;
         }
@@ -56,7 +61,7 @@ namespace Converter.DataAccessLayer.Structures
                 return ms.ToArray();
             }
         }
-        public object Unboxing(byte[] item)
+        private object Unboxing(byte[] item)
         {
             var bf = new BinaryFormatter();
             using (var ms = new MemoryStream())

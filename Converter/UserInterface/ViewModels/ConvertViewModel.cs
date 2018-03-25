@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Converter.BusinessLogicLayer.Interfaces;
 using Converter.BusinessLogicLayer;
+using System.Collections.ObjectModel;
 
 namespace Converter.ViewModels
 {
@@ -19,6 +20,8 @@ namespace Converter.ViewModels
         private FileType _filyTypeTo;
         private string _progress;
         private DataAccessLayer.Structures.File _file = new DataAccessLayer.Structures.File();
+        private ObservableCollection<string> _listOfname = new ObservableCollection<string>();
+        private string Path { get; set; }
         #endregion
         #region Properties
         public FileType FilyTypePropertyFrom
@@ -56,6 +59,15 @@ namespace Converter.ViewModels
                 RaisePropertyChanged(nameof(ListOfTrade));
             }
         }
+        public ObservableCollection<string> ListOfName
+        {
+            get { return _listOfname; }
+            set
+            {
+                _listOfname = value;
+                RaisePropertyChanged(nameof(ListOfName));
+            }
+        }
         public string Progress
         {
             get { return _progress; }
@@ -85,11 +97,13 @@ namespace Converter.ViewModels
         private void DownloadFile()
         {
             ListOfTrade = _file.Load();
+            var Size = _file.Size;
+            Path = _file.Path;
+            ListOfName = _file.ListOfNames;
         }
         private void Converter()
         { 
-            var convertType = FileType.BinaryToCsv;
-            _fromBinToCSV.GetConverter(convertType).ToConvert(ListOfTrade);
+            _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade, Path);
         }
     }
 }
