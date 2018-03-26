@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using Converter.DataAccessLayer;
+using Converter.UserInterface.Models;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Converter.Views
 {
@@ -10,8 +13,8 @@ namespace Converter.Views
         }
         private void DataGridWithBinaryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var cellInfo = DataGridWithBinaryList.SelectedCells[0];
-            var content = cellInfo.Column.GetCellContent(cellInfo.Item);
+            var cellInfo = DataGridWithBinaryList.SelectedItem as FilesModel;
+            MessageBox.Show("Status: " + cellInfo.Progress);
         }
     }
 }
