@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:Converter.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Width="925"
-             Height="475"
+             Height="550"
              Background="LightBlue"
              mc:Ignorable="d">
 

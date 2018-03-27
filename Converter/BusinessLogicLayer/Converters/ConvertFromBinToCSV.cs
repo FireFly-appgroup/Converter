@@ -4,16 +4,16 @@ using System;
 using System.Reflection;
 using System.Linq;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Converter.BusinessLogicLayer.Structures
 {
     public class ConvertFromBinToCSV : IConverter
     {
-        private List<string> ListOfcsvCompletePath = new List<string>();
-       public  List<string> ToConvert<T>(ObservableCollection<T> FileForConvert)
+        public static ObservableCollection<string> ListOfcsvCompletePath = new ObservableCollection<string>();
+       public  bool ToConvert<T>(ObservableCollection<T> FileForConvert)
         {
+            ListOfcsvCompletePath.Clear();
             foreach (T item in FileForConvert)
             {
                 var csvCompletePath = String.Format(AppDomain.CurrentDomain.BaseDirectory + "{0}.csv", Guid.NewGuid());
@@ -35,7 +35,7 @@ namespace Converter.BusinessLogicLayer.Structures
                         sw.Write(row + newLine);
                 }
             }
-            return ListOfcsvCompletePath;
+            return true;
         }
     }
 }

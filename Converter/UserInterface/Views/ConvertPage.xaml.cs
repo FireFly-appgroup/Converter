@@ -1,5 +1,4 @@
-﻿using Converter.DataAccessLayer;
-using Converter.UserInterface.Models;
+﻿using Converter.UserInterface.Models;
 using System.Windows;
 using System.Windows.Controls;
 

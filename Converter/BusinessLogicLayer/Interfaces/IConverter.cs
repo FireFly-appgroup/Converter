@@ -6,6 +6,6 @@ namespace Converter.BusinessLogicLayer.Interfaces
 {
     public interface IConverter
     {
-        List<string> ToConvert<T>(ObservableCollection<T> File);
+        bool ToConvert<T>(ObservableCollection<T> File);
     }
 }

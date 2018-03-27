@@ -1,22 +1,28 @@
-﻿using Converter.DataAccessLayer.Interfaces;
+﻿using Converter.BusinessLogicLayer;
+using Converter.BusinessLogicLayer.Interfaces;
+using Converter.DataAccessLayer.Interfaces;
+using Converter.UserInterface.Models;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows;
+using System.Threading.Tasks;
 
 namespace Converter.DataAccessLayer.Structures
 {
     [Serializable]
     public class File : IFile
     {
+        private IConvertFactory _fromBinToCSV = new ConvertFactory();
         public double Size { get; set; }
         public string Name { get; set; }
-        public string Path { get; set; }    
-        public ObservableCollection<TradeRecord> tradeRecord = new ObservableCollection<TradeRecord>();
+        public string Path { get; set; }
+        public ObservableCollection<TradeRecord> TradeRecord = new ObservableCollection<TradeRecord>();
         private bool IsOpenFile { get; set; }
+        private FilesModel files = new FilesModel();
         public void Save<T>(T trade)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -29,7 +35,7 @@ namespace Converter.DataAccessLayer.Structures
                 write.Close();
             }
         }
-        public ObservableCollection<TradeRecord> Load()
+        public FilesModel Load()
         {
             string BinaryFile = string.Empty;
             Name = String.Empty; Path = String.Empty;
@@ -40,7 +46,8 @@ namespace Converter.DataAccessLayer.Structures
             if (openFileDialog.ShowDialog() == true && IsOpenFile == true)
             {
                 BinaryReader read = new BinaryReader(new FileStream(openFileDialog.FileName, FileMode.Open));
-                Name = openFileDialog.SafeFileName;
+                files.Name = openFileDialog.SafeFileName;
+                files.Progress = "Not Completed";
                 Path = openFileDialog.FileName;
                 Size = read.BaseStream.Length;
                 int k = 0;
@@ -51,9 +58,9 @@ namespace Converter.DataAccessLayer.Structures
                     tree[k++] = read.ReadByte();
                 }
                 read.Close();
-                tradeRecord = Unboxing(tree) as ObservableCollection<TradeRecord>;
+                TradeRecord = Unboxing(tree) as ObservableCollection<TradeRecord>;
             }
-            return tradeRecord;
+            return files;
         }
         private byte[] Boxing(object item)
         {
@@ -73,6 +80,10 @@ namespace Converter.DataAccessLayer.Structures
                 ms.Position = 0;
                 return bf.Deserialize(ms) as object;
             }
+        }
+        public bool TaskCompleted()
+        {
+            return _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(TradeRecord);
         }
         public void OnFileOpenOK(Object sender, CancelEventArgs e)
         {

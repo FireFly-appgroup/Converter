@@ -5,38 +5,23 @@
              xmlns:local="clr-namespace:Converter.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Width="925"
-             Height="700"
+             Height="725"
              Background="LightBlue"
              mc:Ignorable="d">
 
     <Grid Width="745"
-          Height="700"
+          Height="725"
           Margin="1,0,179,0"
           HorizontalAlignment="Center"
           VerticalAlignment="Center">
-
-        <Button Height="40"
-                Margin="31,290,498,370"
-                Background="#0088ac"
-                Command="{Binding ConvertCommand,
-                                  Mode=OneTime}"
-                Content="Convert"
-                Foreground="White" />
-
-        <Button Margin="273,28,313,646"
-                Background="#0088ac"
-                Command="{Binding ClearCommand,
-                                  Mode=OneTime}"
-                Content="Clear All"
-                Foreground="White" />
         <DataGrid x:Name="DataGridWithBinaryList"
-                  Width="420"
-                  Height="271"
-                  Margin="273,59,0,0"
+                  Width="280"
+                  Height="238"
+                  Margin="33,118,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   AutoGenerateColumns="False"
-                  ItemsSource="{Binding ConvertList}"
+                  ItemsSource="{Binding ConvertList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   SelectionChanged="DataGridWithBinaryList_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="140"
@@ -51,45 +36,40 @@
                                                       UpdateSourceTrigger=PropertyChanged}"
                                     Header="Progress"
                                     IsReadOnly="True" />
-                <DataGridTextColumn Width="140"
-                                    Binding="{Binding ConvertedFile,
-                                                      Mode=TwoWay}"
-                                    Header="Converted Files"
-                                    IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="FromLabel"
-               Width="46"
-               Margin="115,121,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Content="From" />
-        <ComboBox x:Name="FromComboBox"
-                  Width="216"
-                  Height="26"
-                  Margin="31,152,0,0"
+        <DataGrid x:Name="DataGridWithConvertedFiles"
+                  Width="346"
+                  Height="237"
+                  Margin="313,119,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
-                  ItemsSource="{Binding MyEnumTypeValues}"
-                  SelectedItem="{Binding FilyTypePropertyFrom}" />
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding ConvertedFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="346"
+                                    Binding="{Binding .}"
+                                    Header="Converted Files"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Label x:Name="ToLabel"
                Width="28"
-               Margin="124,182,0,0"
+               Margin="358,68,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="To" />
+               Content="To" RenderTransformOrigin="1.321,0.538" />
         <ComboBox x:Name="ToComboBox"
-                  Width="216"
+                  Width="226"
                   Height="26"
-                  Margin="31,213,0,0"
+                  Margin="433,68,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   ItemsSource="{Binding MyEnumTypeValues}"
                   SelectedItem="{Binding FilyTypePropertyTo}" />
         <Button x:Name="Open"
-                Width="216"
-                Height="39"
-                Margin="31,59,0,0"
+                Width="626"
+                Height="40"
+                Margin="33,18,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Background="#0088ac"
@@ -97,5 +77,31 @@
                                   Mode=OneTime}"
                 Content="Open Binary Files"
                 Foreground="White" />
+        <Label x:Name="FromLabel"
+            Width="46"
+            Margin="29,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="From" />
+        <ComboBox x:Name="FromComboBox"
+            Width="225"
+            Height="26"
+            Margin="79,68,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ItemsSource="{Binding MyEnumTypeValues}"
+            SelectedItem="{Binding FilyTypePropertyFrom}" />
+        <Button Height="40"
+            Margin="33,374,90,286"
+            Background="#0088ac"
+            Command="{Binding ConvertCommand, Mode=OneTime}"
+            Content="Convert"
+            Foreground="White" />
+        <Button Margin="33,440,90,220"
+            Background="#0088ac"
+            Height="40"
+            Command="{Binding ClearCommand, Mode=OneTime}"
+            Content="Clear All"
+            Foreground="White" />
     </Grid>
 </UserControl>

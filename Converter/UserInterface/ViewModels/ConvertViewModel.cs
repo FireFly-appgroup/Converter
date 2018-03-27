@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Threading;
 using Converter.UserInterface.Models;
+using Converter.BusinessLogicLayer.Structures;
 
 namespace Converter.ViewModels
 {
     public class ConvertViewModel : ObservableObject
     {
         #region vars
-        private IConvertFactory _fromBinToCSV = new ConvertFactory();
         private RelayCommand _convertCommand;
         private RelayCommand _openCommand;
         private RelayCommand _clearCommand;
@@ -24,6 +24,7 @@ namespace Converter.ViewModels
         private FileType _filyTypeTo;
         private DataAccessLayer.Structures.File _file = new DataAccessLayer.Structures.File();
         private ObservableCollection<FilesModel> _convertList = new ObservableCollection<FilesModel>();
+        private ObservableCollection<string> _convertedFiles = new ObservableCollection<string>();
         private FilesModel files = new FilesModel();
         #endregion
         #region Properties
@@ -71,6 +72,15 @@ namespace Converter.ViewModels
                 RaisePropertyChanged(nameof(ConvertList));
             }
         }
+        public ObservableCollection<string> ConvertedFiles
+        {
+            get { return _convertedFiles; }
+            set
+            {
+                _convertedFiles = value;
+                RaisePropertyChanged(nameof(ConvertedFiles));
+            }
+        } 
         public RelayCommand OpenCommand
         {
             get
@@ -98,40 +108,27 @@ namespace Converter.ViewModels
         #endregion
         private void DownloadFile()
         {
-            ListOfTrade = _file.Load();
-            files.Name = _file.Name;
             if (files.Name != String.Empty)
             {
-                files.Progress = "Not Completed";
+                var model = _file.Load();
+                var files = new FilesModel();
+                files.Name = model.Name;
+                files.Progress = model.Progress;
                 ConvertList.Add(files);
             }
         }
-        private async void Converter()
-        {  
-            await TaskCompleted();
-        }
-        private async Task TaskCompleted()
+        private void Converter()
         {
-            var progressHandler = new Progress<string>(value =>
+            if (_file.TaskCompleted() == true)
             {
-                files.Progress = value;
-            });
-            var progress = progressHandler as IProgress<string>;
-            await Task.Run(() =>
-            {
-                var listOfPathes = _fromBinToCSV.GetConverter(FileType.BinaryToCsv).ToConvert(ListOfTrade);
-                foreach (var item in listOfPathes)
-                    files.ConvertedFile = item;
-                Thread.Sleep(100);
-            });
-            foreach (var item in ConvertList)
-            {
-                files.Progress = "Completed";
-            }
+                ConvertList.Where(w => w.Progress == "Not Completed").ToList().ForEach(s => s.Progress = "Completed");
+                ConvertedFiles = ConvertFromBinToCSV.ListOfcsvCompletePath;
+            }       
         }
         private void Clear()
         {
             ConvertList.Clear();
+            ConvertedFiles.Clear();
         }
     }
 }

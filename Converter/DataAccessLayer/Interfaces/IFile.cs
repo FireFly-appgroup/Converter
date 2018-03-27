@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using Converter.UserInterface.Models;
 
 namespace Converter.DataAccessLayer.Interfaces
 {
     interface IFile
     {
         void Save<T>(T trade);
-        ObservableCollection<TradeRecord> Load();
+        FilesModel Load();
     }
 }
